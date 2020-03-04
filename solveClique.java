@@ -9,7 +9,6 @@
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class solveClique
 {
@@ -113,7 +112,7 @@ public class solveClique
       System.out.print("{");
       int counter = 0;
       //Print vertices from list contained in clique
-      for (int i=0; i < graphSize; i++)
+      for (int i=0; i < graphSize ; i++)
       {
         if (maxClique[i] == 1)
         {
@@ -128,7 +127,6 @@ public class solveClique
       }
       System.out.print("} (size=" + maxK + ", ");
       System.out.println((System.currentTimeMillis() - cpuTime) + " ms)");
-
     }
     //Close scanner
     scan.close();
@@ -149,6 +147,7 @@ public class solveClique
       int vertex = toCheck.get(i);
       currentClique.add(vertex);
 
+      //create a new list of next connected edges
       ArrayList<Integer> newToCheck = new ArrayList<Integer>(i);
       for (int j=0; j<=i; j++)
       {
@@ -158,14 +157,20 @@ public class solveClique
           newToCheck.add(nextVertex);
         }
       }
+      //when all vertices are checked and the current clique
+      // is larger than the pervious maxK, save vertex list
       if (newToCheck.isEmpty() && currentClique.size() > maxK)
       {
         saveSolution(currentClique);
       }
+      //if the new to check list has more connected edges,
+      // recursively check to see if any more could join the
+      // current clique
       if (!newToCheck.isEmpty())
       {
         increaseClique(currentClique, newToCheck);
       }
+      //remove the value you were checking back out of the clique again
       currentClique.remove(currentClique.size()-1);
       toCheck.remove(i);
     }
