@@ -1,5 +1,5 @@
 /*
- * solveClique.java
+ * solveISet.java
  * IT328 Project 1
  * Student A - Katie Sherman
  * Student B - Sunny Singh
