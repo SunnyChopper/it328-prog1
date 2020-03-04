@@ -13,11 +13,9 @@ import java.util.ArrayList;
 public class solveClique
 {
   static String inputFile;
-  static int[] degree;
   static int[][] edges;
   static int graphSize;
   static long cpuTime;
-  static long timeLimit = -1;
   static int maxK;
   static int[] maxClique;
   static int graphCount;
@@ -66,7 +64,6 @@ public class solveClique
       graphCount++;
       //resize and reset arrays
       edges = new int[graphSize][graphSize];
-      degree = new int[graphSize];
       maxClique = new int[graphSize];
       maxK = 0;
 
@@ -84,7 +81,6 @@ public class solveClique
           {
             edges[i][j] = temp;
             totalEdges += temp;
-            degree[i] += temp;
           }
         }
         readTokens.close();
