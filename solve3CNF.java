@@ -83,6 +83,7 @@ public class solve3CNF {
 				// Set number of literals in the 3-SAT
 				if (numLiteralFlag == false) {
 					if (integerRead == 0) {
+						System.out.println("***");
 						return;
 					}
 					numLiterals = integerRead;
@@ -205,7 +206,7 @@ public class solve3CNF {
 
 			// When all vertices are checked and the current clique
 			// is larger than the pervious maxK, save vertex list
-			if (newToCheck.isEmpty() && currentClique.size() == maxK) {
+			if (newToCheck.isEmpty() && currentClique.size() >= maxK) {
 				foundSolution = true;
 				saveSolution(currentClique);
 				return;
@@ -218,8 +219,12 @@ public class solve3CNF {
 			}
 
       		// Remove the value you were checking back out of the clique again
-			currentClique.remove(currentClique.size()-1);
-			toCheck.remove(i);
+      		if (foundSolution != true) {
+				currentClique.remove(currentClique.size()-1);
+				toCheck.remove(i);
+			} else {
+				break;
+			}
 		}
 	}
 
@@ -230,11 +235,9 @@ public class solve3CNF {
 			maxClique[i] = 0;
 		}
 
-		// Go through 
 		for (int i : currentClique)
 		{
 			maxClique[i] = 1;
-			maxK = currentClique.size();
 		}
 	}
 
